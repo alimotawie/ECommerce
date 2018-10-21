@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\Rate;
 use App\Review;
 use Illuminate\Http\Request;
@@ -57,9 +58,13 @@ class profileController extends Controller
     {
         //
 
+        $reviews= Review::where('user_id' ,'=',$id)->get();
+
         $userData = User::findorfail($id);
 
-        return view('userprofile.profilePage',compact('userData'));
+        $purchasedItems = Order::where(['user_id' => $id, 'status'=> 'confirmed'])->get();
+
+        return view('userprofile.profilePage',compact('userData', 'reviews', 'purchasedItems'));
     }
 
     /**

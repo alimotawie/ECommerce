@@ -2,6 +2,14 @@
 
 @section('title' , $product->name )
 
+@section('product_title')
+    <section id="page-title">
+        <div class="container clearfix">
+            <h1>{{ $product->name }}</h1>
+        </div>
+    </section>
+@endsection
+
 @section('content')
 
 <div class="notopmargin bottommargin-lg">
@@ -75,7 +83,7 @@
 
                 <!-- Product Single - Short Description
                 ============================================= -->
-                <p>{!!  $product->description !!} </p>
+                <p style="white-space: pre-line;">{!!  $product->description !!} </p>
                 <!-- Product Single - Short Description End -->
 
                 <!-- Product Single - Meta

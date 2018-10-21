@@ -47,7 +47,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Product Name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name"  required autofocus>
+                                    <input id="name" type="text" class="form-control" maxlength="25" name="name"  required autofocus>
 
                                 </div>
                             </div>

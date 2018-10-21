@@ -6,9 +6,9 @@
 		<!-- Content
 		============================================= -->
 
-        <div class="col-sm-12 notopmargin">
+        <div class="col-sm-12" style="margin-top: 80px;">
 
-							<img src="images/icons/avatar1.png" class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
+							<img src="/images/icons/avatar1.png" class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
 
 							<div class="heading-block noborder">
 								<h3>{{$userData->name}}</h3>
@@ -58,11 +58,29 @@
 
 											<div class="tab-content clearfix" id="tab-purchase">
 
-												<p class=""></p>
+												<ol class="commentlist noborder nomargin nopadding clearfix">
+													@foreach($purchasedItems as $item )
 
-												<div class="table-responsive">
+														<li class="comment even thread-even depth-1" id="li-comment-1">
+															<div id="comment-1" class="comment-wrap clearfix">
+																<div class="comment-meta">
+																	<div class="comment-author vcard">
+																		<span class="comment-avatar clearfix">
+																		<img alt='' src='{{ URL::asset('products/images/'.App\Product::find($item->product_id)->image1) }}' class='avatar avatar-60 photo avatar-default' height='60' width='60' /></span>
+																	</div>
+																</div>
+																<div class="comment-content clearfix">
+																	<div class="comment-author">{{App\Product::find($item->product_id)->name}}<span><a href="#" title="Permalink to this comment">Purchased At: {{$item->created_at }}</a></span></div>
+																	<p></p>
+																</div>
 
-												</div>
+																<div class="clear"></div>
+															</div>
+
+														</li>
+
+													@endforeach
+												</ol>
 
 											</div>
 

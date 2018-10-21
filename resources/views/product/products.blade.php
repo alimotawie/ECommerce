@@ -10,6 +10,15 @@
 
     @else
 
+    <div class="notopmargin bottommargin-lg">
+        @if (session('status'))
+            <div class="alert alert-danger">
+                {{ session('status') }}
+            </div>
+
+        @endif
+    </div>
+
     <!-- Content
 		============================================= -->
     <section id="content">
@@ -27,58 +36,39 @@
                     <div id="shop" class="shop product-3 grid-container clearfix">
 
                         @foreach($products as $product)
-                        <div class="product sf-{{$product->category}}  clearfix">
-                            <div class="product-image">
-                                <a> <img src="{{ URL::asset('products/images/'.$product->image1)}}" alt="item image 1"></a>
-                                <a><img  src="{{ URL::asset('products/images/'.$product->image2)}}" alt="item image 2 "> </a>
-                            @if(Auth::check())
-                            <div class='center'>
-                                <div class="product-overlay">
-                              @if(Auth::user()->role !='admin')
-                                        @if($product->stock > 0)
-                                    <a href="#" onclick="document.forms['addToCart'].submit(); return false;"  class="add-to-cart input-block-level" ><i class="icon-shopping-cart"></i><span> Add to Cart</span></a>
-
-                                    {!! Form::open(['action' => 'orderController@store', 'method'=>'post', 'name'=>'addToCart', 'class'=>"cart nobottommargin clearfix"]) !!}
-                                    {!! Form::hidden('product_id', $product->id ) !!}
-                                    {!! Form::hidden('quantity', 1 ) !!}
-
-                                {{--{!! Form::submit('Add to cart' , ['class'=>'add-to-cart button nomargin']) !!}--}}
-                                {!! Form::close() !!}
+                            <div class="product sf-{{$product->category}} clearfix">
+                                <div class="product-image">
+                                    <a href="#"><img src="{{ URL::asset('products/images/'.$product->image1)}}" alt="Image 1" style="height: 223px;"></a>
+                                    <a href="#"><img src="{{ URL::asset('products/images/'.$product->image2)}}" alt="Image 2" style="height: 223px;"></a>
+                                    <div class="sale-flash" style="display: none;">50% Off*</div>
+                                    @if(Auth::check())
+                                        <div class="product-overlay">
+                                            @if(Auth::user()->role !='admin')
+                                                @if($product->stock > 0)
+                                                    <a href="/order/{{ $product->id  }}/1" class="add-to-cart" style="width: 100%;"><i class="icon-shopping-cart"></i><span> Add to Cart</span></a>
+                                                @endif
+                                            @else
+                                                <a href="{{ route('product.edit',['id' => $product->id ] ) }}" class="add-to-cart"><i class="icon-cogs"></i><span> Edit Item</span></a>
+                                                <a href="/product/delete/{{ $product->id }}"><i class="icon-remove-sign"></i><span> Delete Item</span></a>
+                                            @endif
+                                        </div>
                                     @endif
                                 </div>
-                                @else
-                                     <a class="btn btn-success " role="button" href="{{ route('product.edit',['id' => $product->id ] ) }}"> Edit Item </a>
+                                <div class="product-desc center">
+                                    @if($product->stock > 0)
+                                        <div class="product-stock">Stock : {{$product->stock }}  </div>
+                                    @else
+                                        <div class="product-stock">OUT OF STOCK  </div>
+                                    @endif
+                                    <div class="product-title" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;vertical-align: bottom;"> <h3><a href="{{route('product.show', ['product' => $product->id])}}">{{$product->name}}</a></h3></div>
+                                    {{--<div class="product-title"><h3><a href="#">Men Grey Casual Shoes Men Grey Casual Shoes Men Grey Casual Shoes</a></h3></div>--}}
+                                    <div class="product-price">{{$product->price}} LE </div>
+                                    <div class="product-rate">
+                                        <input id="input-15" class="rating" value="{{ $product->rates()['averageRate']}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
+                                        ( Users : {{ $product->rates()['count']}})
 
-                                    {!! Form::open([ 'route' => ['product.destroy',$product->id] , 'method'=>'delete' ]) !!}
-                                    {!! Form::submit('Delete Item',['class'=>'btn btn-danger'])!!}
-
-                           </div>
-                            @endif
-                            </div>
-                            </div>
-                            @else
-                            </div>
-                            @endif
-
-                            <div class="product-desc center ">
-
-                                @if($product->stock > 0)
-                                    <div class="product-stock">Stock : {{$product->stock }}  </div>
-                                @else
-                                    <div class="product-stock">OUT OF STOCK  </div>
-                                @endif
-                                <div class="product-title"> <h3><a href="{{route('product.show', ['product' => $product->id])}}">{{$product->name}}</a></h3></div>
-                                <div class="product-price">{{$product->price}} LE </div>
-
-                                <div class="product-rate">
-
-                                            <input id="input-15" class="rating" value="{{ $product->rates()['averageRate']}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
-                                    ( Users : {{ $product->rates()['count']}})
-
+                                    </div>
                                 </div>
-
-                             </div>
-                            
                             </div>
                         @endforeach
                     </div><!-- #shop end -->
@@ -119,6 +109,8 @@
                         </div>
                     </div>
                 </div><!-- .sidebar end -->
+            </div>
+        </div>
     </section><!-- #content end -->
 
 @endif
