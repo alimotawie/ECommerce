@@ -38,12 +38,28 @@ class orderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function storeMultiple($productId, $quantity)
+    {
+        $newOrder = new Order;
+
+        $newOrder->user_id = Auth::id();
+        $newOrder->product_id = $productId;
+        $newOrder->quantity = $quantity;
+        $newOrder->status = 'free';
+        $newOrder->save();
+
+        $orders=Order::where('user_id' ,'=',Auth::id())->get();
+
+        session()->put('cart', $orders);
+
+        return redirect()->back()->with('status','Order add to cart');
+    }
+
+
     public function store(Request $request)
     {
-        //
         $newOrder = new Order;
 
         $newOrder->user_id = Auth::id();
@@ -57,7 +73,6 @@ class orderController extends Controller
         session()->put('cart', $orders);
 
         return redirect()->back()->with('status','Order add to cart');
-
     }
 
     /**
@@ -105,9 +120,11 @@ class orderController extends Controller
     public function destroy($id , Request $request)
     {
 
-        session('cart')->forget($request->orderNo);
-
         Order::destroy($id);
+
+        $orders=Order::where('user_id' ,'=',Auth::id())->get();
+
+        session()->put('cart', $orders);
 
         return redirect()->back()->with('status','Order deleted');
 

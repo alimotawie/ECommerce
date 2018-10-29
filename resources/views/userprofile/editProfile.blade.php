@@ -2,7 +2,7 @@
 @section('title','Edit Profile')
 
 @section('content')
-    <div class="col-md-8 col-lg-offset-3">
+    <div class="col-md-8 col-lg-offset-3" style="margin-top: 80px;">
 
     <h4> Edit Profile</h4>
 

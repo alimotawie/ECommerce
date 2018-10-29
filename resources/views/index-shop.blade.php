@@ -10,7 +10,7 @@
 	<!-- page slider
 		============================================= -->
 
-	<section id="slider" class="slider-parallax revslider-wrap ohidden clearfix">
+	<section id="slider" class="slider-parallax revslider-wrap ohidden clearfix" style="margin-top: 80px;">
 
 					<div class="col_two_third bottommargin-lg">
 
@@ -94,21 +94,18 @@
 
                         <div class="product sf-{{$product->category}}  clearfix">
                             <div class="product-image">
-                                <a> <img src="{{ URL::asset('products/images/'.$product->image1)}}" alt="item image 1"></a>
-                                <a><img  src="{{ URL::asset('products/images/'.$product->image2)}}" alt="item image 2 "> </a>
+                                <a> <img src="{{ URL::asset('products/images/'.$product->image1)}}" alt="item image 1" style="height: 223px;"></a>
+                                <a><img  src="{{ URL::asset('products/images/'.$product->image2)}}" alt="item image 2 " style="height: 223px;"> </a>
                             @if(Auth::check())
                             <div class='center'>
                                 <div class="product-overlay">
                               @if(Auth::user()->role !='admin')
 										@if($product->stock > 0)
 
-										<a href="#" onclick="document.forms['addToCart'].submit(); return false;"  class="add-to-cart input-block-level" ><i class="icon-shopping-cart"></i><span> Add to Cart</span></a>
+										<a href="/order/{{ $product->id  }}/1" class="add-to-cart input-block-level" ><i class="icon-shopping-cart"></i><span> Add to Cart</span></a>
 
-                                    {!! Form::open(['action' => 'orderController@store', 'method'=>'post', 'name'=>'addToCart', 'class'=>"cart nobottommargin clearfix"]) !!}
-                                    {!! Form::hidden('product_id', $product->id ) !!}
-                                    {!! Form::hidden('quantity', 1 ) !!}
 
-                                {{--{!! Form::submit('Add to cart' , ['class'=>'add-to-cart button nomargin']) !!}--}}
+											{{--{!! Form::submit('Add to cart' , ['class'=>'add-to-cart button nomargin']) !!}--}}
                                 {!! Form::close() !!}
 											@else
 											<a class="add-to-cart input-block-level" ><i class="icon-shopping-cart"></i><span> Out of stock</span></a>

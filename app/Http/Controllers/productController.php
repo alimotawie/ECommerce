@@ -256,7 +256,7 @@ class productController extends Controller
         {
         Product::destroy($id);
 
-        return redirect()->back()->with('status',"item deleted");
+        return redirect('/product')->with('status',"item deleted");
         }else
         {
              return 'Not Allowed';

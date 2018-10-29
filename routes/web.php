@@ -47,7 +47,11 @@ Route::resource('/product' , 'productController');
 
 Route::resource('/order' , 'orderController');
 
+Route::get('/order/{productId}/{quantity}' , 'orderController@storeMultiple');
+
 Route::get('/product/create' , 'productController@create');
+
+Route::get('/product/delete/{id}' , 'productController@destroy');
 
 Route::get('/pendingConfirm' , 'orderController@pendingOrder')->name('pendingOrder');
 

@@ -1,7 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use App\Order;
 use App\Rate;
 use App\Review;
 use Illuminate\Http\Request;
@@ -9,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\User;
-
 class profileController extends Controller
 {
     /**
@@ -23,9 +21,9 @@ class profileController extends Controller
         $userData=Auth::user();
         $reviews = Review::where('user_id','=',Auth::id())->get();
         $rates = Rate::where('user_id','=',Auth::id())->get();
-        return view('userprofile/profilePage',compact('userData','reviews','rates'));
+        $purchasedItems = Order::where(['user_id' => $userData->id, 'status'=> 'confirmed'])->get(); 
+        return view('userprofile/profilePage',compact('userData','reviews','rates','purchasedItems'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +33,6 @@ class profileController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -46,7 +43,6 @@ class profileController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
@@ -56,12 +52,11 @@ class profileController extends Controller
     public function show($id)
     {
         //
-
+        $reviews= Review::where('user_id' ,'=',$id)->get();
         $userData = User::findorfail($id);
-
-        return view('userprofile.profilePage',compact('userData'));
+        $purchasedItems = Order::where(['user_id' => $id, 'status'=> 'confirmed'])->get();
+        return view('userprofile.profilePage',compact('userData', 'reviews', 'purchasedItems'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -73,7 +68,6 @@ class profileController extends Controller
         $userData=Auth::user();
         return view ('userprofile/editProfile' , compact('userData'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -81,48 +75,34 @@ class profileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-
-
     public function update(Request $request, $id)
     {
         $userdata = User::findorfail($id);
-
         if($request->password){
-
             $request->validate([
                 'name' => 'required|string|max:255',
                 'mobile'=>'required|string|min:11',
                 'address'=>'required|string',
                 'password'=>'required|string|min:6|confirmed'
             ]);
-
             $userdata->name = $request->name;
             $userdata->address = $request->address;
             $userdata->mobile = $request->mobile;
             $userdata->password = Hash::make($request->password);
-
             $userdata->save();
-
         }else {
-
             $this->validate($request, [
                 'name' => 'required|string|max:255',
                 'mobile'=>'required|string|min:11',
                 'address'=>'required|string',
             ]);
-
             $userdata->name = $request->name;
             $userdata->address = $request->address;
             $userdata->mobile = $request->mobile;
-
             $userdata->save();
-
         }
-
         return redirect()->route('profile.edit',['id'=>Auth::id()])->with('status', 'Profile updated!');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -132,9 +112,7 @@ class profileController extends Controller
     public function destroy($id)
     {
         Auth::logout();
-
         User::destroy($id);
-
         return redirect()->route('home');
     }
 }

@@ -81,7 +81,7 @@
                         @if(Auth::check())
                             @if(Auth::user()->role =='admin')
 
-                         <li><a> <div><i class="icon-user"></i>Admin Controller</div></a>
+                         <li><a href="#"> <div><i class="icon-user"></i>Admin Controller</div></a>
                             <ul>
                                 <li><a href="{{action('productController@create')}}"><div>Add new product</div></a> </li>
                                 <li><a href="{{route('pendingOrder')}}"><div>Confirm Orders</div></a> </li>
@@ -193,7 +193,7 @@
 
                                 <div class="top-cart-item clearfix">
                                     <div class="top-cart-item-image">
-                                        <a ><img src="products/images/{{App\Product::find($order->product_id)->image1}}" alt="product image" /></a>
+                                        <a ><img src="/products/images/{{App\Product::find($order->product_id)->image1}}" alt="product image" /></a>
                                     </div>
                                     <div class="top-cart-item-desc">
                                         <a >{{App\Product::find($order->product_id)->name }}</a>
@@ -235,11 +235,15 @@
 
     <div class="clearfix"></div>
 
+    <!-- Product Title Start-->
+
+    @yield('product_title')
+
     <!-- #Content Start-->
 
     <section id="content">
 
-        <div class="content-wrap">
+        <div class="content-wrap" style="padding: 0;">
 
             <div class="container clearfix">
 
