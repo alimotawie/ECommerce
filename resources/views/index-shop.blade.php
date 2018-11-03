@@ -5,74 +5,98 @@
 
 @section('title','Vapery | The Vapes Home')
 
+
 @section('content')
 
 	<!-- page slider
 		============================================= -->
 
-	<section id="slider" class="slider-parallax revslider-wrap ohidden clearfix" style="margin-top: 80px;">
+	<section id="slider" class="slider clearfix topmargin-sm ">
 
-					<div class="col_two_third bottommargin-lg">
-
-						<div class="fslider" data-arrows="true">
-							<div class="flexslider">
-								<div class="slider-wrap">
-
-									<div class="slide">
-										<a href="#">
-											<img src="images/shop/slider/22.jpg" alt="Shop Image">
-										</a>
-									</div>
-
-									<div class="slide">
-										<a href="#">
-											<img src="images/shop/slider/44.jpg" alt="Shop Image">
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-					<div class="col_one_third bottommargin-lg col_last">
-
-						<div class="col_full bottommargin-sm">
-							<a href="{{route('product.index')}}"><img src="{{ URL::asset('images/shop/banners/44.jpg')}}" alt="All Products"></a>
-						</div>
-
-						<div class="col_full nobottommargin">
-							<a href="{{route('filterCategory',['category'=>'liquid'] )}}"><img src="{{ URL::asset('images/shop/banners/33.jpg')}}" alt="Liquids"></a>
-						</div>
-
-					</div>
+		<div class="camera_wrap" id="camera_wrap_1">
+			<div data-src={{ URL::asset("images/slider/1.jpg")}}>
+				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
+					<div class="container">Powerful Layout with Responsive functionality that can be adapted to any screen size.</div>
+				</div>
+			</div>
+			<div data-src={{ URL::asset("images/slider/2.jpg")}}>
+				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
+					<div class="container">Looks beautiful &amp; ultra-sharp on Retina Screen Displays.</div>
+				</div>
+			</div>
+			<div data-src={{ URL::asset("images/slider/3.jpg")}}>
+				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
+					<div class="container">Included 20+ custom designed Slider Pages with Premium Sliders like Layer, Revolution, Swiper &amp; others.</div>
+				</div>
+			</div>
+			<div  data-src={{ URL::asset("images/slider/4.jpg")}}>
+				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
+					<div class="container">You have easy control on each &amp; every element that provides endless customization possibilities.</div>
+				</div>
+			</div>
+		</div>
 
 	</section>
 	<!-- end of slider-->
 
-		<section id="content">
 
-			<div class="content-wrap">
+	<div class="container clearfix topmargin-lg">
 
-				<div class="container clearfix">
-
-					<div class="row clearfix">
-
-			<div class="promo parallax promo-full " style="background-image: url('images/parallax/3.jpg');" data-stellar-background-ratio="0.4">
-				<div class="container clearfix">
-					<h3>Get what you need at the <span>Best Market PRICE</span></h3>
-					<span>Products available include Mods, Tanks, Liquids  &amp; MORE !.</span>
-					<a href="{{route('product.index')}}" class="button button-xlarge button-rounded">Check Our Products</a>
+		<div class="col_one_third bottommargin-lg">
+			<div class="feature-box center media-box fbox-bg">
+				<div class="fbox-media">
+					<img src="images/liquid.png" alt="Image" style="height: 223px;">
+				</div>
+				<div class="fbox-desc">
+					<h3>70/30</h3>
+					<p><a href="#" class="btn btn-default">Shop Now</a></p>
 				</div>
 			</div>
 		</div>
+
+		<div class="col_one_third bottommargin-lg">
+			<div class="feature-box center media-box fbox-bg">
+				<div class="fbox-media">
+					<img src="images/liquid.png" alt="Image" style="height: 223px;">
+				</div>
+				<div class="fbox-desc">
+					<h3>50/50</h3>
+					<p><a href="#" class="btn btn-default">Shop Now</a></p>
 				</div>
 			</div>
-		</section>
+		</div>
 
-	
+		<div class="col_one_third bottommargin-lg col_last">
+			<div class="feature-box center media-box fbox-bg">
+				<div class="fbox-media">
+					<img src="images/offer.png" alt="Image" style="height: 223px;">
+				</div>
+				<div class="fbox-desc">
+					<h3>Special Offers </h3>
+					<p><a href="#" class="btn btn-default">Shop Now</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-		<div class="fancy-title title-dotted-border title-center">
+	<section id="content ">
+
+		<div class="container clearfix ">
+
+			<div class="row clearfix ">
+
+				<div class="promo parallax promo-full " style="background-image: url({{ URL::asset('images/banner2.jpg')}});" data-stellar-background-ratio="0.4">
+					<div class="container clearfix">
+						<h3>Get what you need at the <span>Best Market PRICE</span> <br> Delivered to your  <span>DOOR STEPS</span></h3>
+						<h4>Your one stop for the BEST E-Liquids in town</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+		<div class="fancy-title title-dotted-border title-center topmargin-sm">
 						<h2>Recent <span>Added</span> Items</h2>
 					</div>
 		<section id="content">
@@ -140,89 +164,157 @@
                         @endforeach
                     </div>
                     </div>
-               
-            </div>
-        
-        <div class="divider notopmargin notopmargin"><i class="icon-circle"></i></div>
+
     </section>
 
+    <div class="clear"></div>
 
-						<div id="features" class="section bottommargin-sm notopmargin">
-					<div class="container clearfix">
-						<div class="heading-block center">
-							<h2>Features List.</h2>
-							<span>Online Store Managment system Where you can </span>
-						</div>
+    <div class="col_one_third bottommargin-lg topmargin-sm">
 
-						<div class="col_one_fourth nobottommargin">
-							<div class="feature-box fbox-plain fbox-dark fbox-small">
-								<div class="fbox-icon">
-									<i class="icon-thumbs-up2"></i>
-								</div>
-								<h3>Know Your Customers</h3>
-								<p class="notopmargin">We offer items rate and review to Know how your customers thinks about you and your products, this will help your improve and statisfy more people  </p>
-							</div>
-						</div>
+        <div class="fancy-title title-border">
+            <h4>Highest Rated </h4>
+        </div>
 
-						<div class="col_one_fourth nobottommargin">
-							<div class="feature-box fbox-plain fbox-dark fbox-small">
-								<div class="fbox-icon">
-									<i class="icon-credit-cards"></i>
-								</div>
-								<h3>Better Online Presence </h3>
-								<p class="notopmargin">Having a facebook page is not enough for branding and get known  , what about having an online store .. sounds better .. more professional </p>
-							</div>
-						</div>
+        <div>
 
-						<div class="col_one_fourth nobottommargin">
-							<div class="feature-box fbox-plain fbox-dark fbox-small">
-								<div class="fbox-icon">
-									<i class="icon-truck2"></i>
-								</div>
-								<h3>Take Orders Online </h3>
-								<p class="notopmargin">Limited Stores and distribution panels ?  Wants to increase your customer reach and demographics ? Wants to sell more ? by taking orders online what can stop you </p>
-							</div>
-						</div>
+            <div class="spost clearfix">
+                <div class="entry-image">
+                    <a href="#"><img src="images/shop/small/1.jpg" alt="Image"></a>
+                </div>
+                <div class="entry-c">
+                    <div class="entry-title">
+                        <h4><a href="#">Blue Round-Neck Tshirt</a></h4>
+                    </div>
+                    <ul class="entry-meta">
+                        <li class="color">$29.99</li>
+                        <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
+                    </ul>
+                </div>
+            </div>
 
-						<div class="col_one_fourth nobottommargin col_last">
-							<div class="feature-box fbox-plain fbox-dark fbox-small">
-								<div class="fbox-icon">
-									<i class="icon-undo"></i>
-								</div>
-								<h3>Manager Your Inventory </h3>
-								<p class="notopmargin"> know and Control your stock , Stock level notifications and reminders  , inventory auto update   </p>
-							</div>
-						</div>
-                    <div class="clear"> </div>
-						<div class="col_one_fourth nobottommargin ">
-							<div class="feature-box fbox-plain fbox-dark fbox-small">
-								<div class="fbox-icon">
-									<i class="icon-undo"></i>
-								</div>
-								<h3>Track Your Sales </h3>
-								<p class="notopmargin">Never get lost in numbers , Profit calculator , top sellers items and transactions history   </p>
-							</div>
-						</div>
 
-					</div>
-				</div>
+        </div>
 
-				
-				<div id="contactus"class="section notopborder nobottomborder nomargin nopadding nobg footer-stick">
-					<div class="container clearfix">
+    </div>
 
-						<div class=" subscribe-widget nobottommargin ">
+    <div class="col_one_third nobottommargin">
 
-							<div class="heading-block notopmargin">
-								<h3><strong>Contact us for more info about prices and packages </strong></h3>
-								<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScqNUX2a7KmjceMEpVLoittndekuIjruAlm4mpkO5SMyjsmWg/viewform?embedded=true" width="100%" height="530" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-							</div>
+        <div class="fancy-title title-border">
+            <h4>Popular Products</h4>
+        </div>
 
-						</div>
+        <div>
 
-					</div>
-				</div>
-		<!-- #content end -->
+            <div class="spost clearfix">
+                <div class="entry-image">
+                    <a href="#"><img src="images/shop/small/3.jpg" alt="Image"></a>
+                </div>
+                <div class="entry-c">
+                    <div class="entry-title">
+                        <h4><a href="#">Round-Neck Tshirt</a></h4>
+                    </div>
+                    <ul class="entry-meta">
+                        <li class="color">$15</li>
+                        <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="col_one_third nobottommargin col_last">
+
+        <div class="fancy-title title-border">
+            <h4>Recommended for You</h4>
+        </div>
+
+        <div>
+
+            <div class="spost clearfix">
+                <div class="entry-image">
+                    <a href="#"><img src="images/shop/small/8.jpg" alt="Image"></a>
+                </div>
+                <div class="entry-c">
+                    <div class="entry-title">
+                        <h4><a href="#">Pink Printed Dress</a></h4>
+                    </div>
+                    <ul class="entry-meta">
+                        <li class="color">$21</li>
+                        <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="divider divider-center topmargin-lg"><i class="icon-circle"></i></div>
+
+    <h3 class="center">Process Steps </h3>
+
+    <div class="line visible-xs"></div>
+
+    <ul class="process-steps process-5 clearfix">
+        <li>
+            <a href="#" class="i-bordered i-circled divcenter icon-plus"></a>
+            <h5>Explore & Add items to your Cart</h5>
+        </li>
+        <li>
+            <a href="#" class="i-bordered i-circled divcenter icon-shopping-cart"></a>
+            <h5>Proceed to check out</h5>
+        </li>
+        <li>
+            <a href="#" class="i-bordered i-circled divcenter icon-check"></a>
+            <h5>Wait for admin confirmation </h5>
+        </li>
+        <li >
+            <a href="#" class="i-bordered i-circled divcenter icon-truck"></a>
+            <h5>Order delivery</h5>
+        </li>
+        <li>
+            <a href="#" class="i-bordered i-circled divcenter  icon-money"></a>
+            <h5>Payment on Delivery</h5>
+        </li>
+    </ul>
+
+    </div>
+
+    </div>
+
+
+	<div class="clear"></div>
+
+	<div class="fancy-title title-border title-center topmargin-sm">
+		<h4>Popular Brands</h4>
+	</div>
+
+	<ul class="clients-grid grid-6 nobottommargin clearfix">
+		<li><a href="#"><img src="images/clients/logo/1.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/2.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/3.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/4.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/5.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/6.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/7.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/8.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/9.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/10.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/11.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/12.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/13.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/14.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/15.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/16.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/19.png" alt="Clients"></a></li>
+		<li><a href="#"><img src="images/clients/logo/18.png" alt="Clients"></a></li>
+	</ul>
+
+	<!-- #content end -->
 
 @endsection
 
@@ -233,11 +325,27 @@
 	<script type="text/javascript" src="{{ URL::asset("js/bootstrap.min.js")}}" > </script>
 	<script type="text/javascript" src="{{ URL::asset("js/jquery.cookie.js")}}" > </script>
 
+	<script type="text/javascript">
+
+        jQuery(document).ready(function($) {
+
+            $('#camera_wrap_1').camera({
+                thumbnails: true,
+                height: '40%',
+                loader: 'pie',
+                loaderPadding: 1,
+                loaderStroke: 5,
+                onLoaded: function() {
+                    $('#camera_wrap_1').find('.camera_next').html('<i class="icon-angle-right"></i>');
+                    $('#camera_wrap_1').find('.camera_prev').html('<i class="icon-angle-left"></i>');
+                }
+            });
+
+        });
+
+	</script>
+
 	<script>
-
-
-
-
 
 		function agecheck()
 		{

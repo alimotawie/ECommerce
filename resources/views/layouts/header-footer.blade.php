@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ URL::asset("css/font-icons.css")}}" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset("css/animate.css")}}" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset("css/magnific-popup.css")}}" type="text/css" />
+    <link rel="stylesheet" href={{ URL::asset("css/camera.css")}} type="text/css" />
 
 
     <!-- Star Rating CSS -->
@@ -68,8 +69,22 @@
                 <!-- Logo
                 ============================================= -->
                 <div id="logo">
-                    <a href="{{Route('home')}}" class="standard-logo" ><img src="{{URL::asset('images/vapery.png')}}" alt="Vapery Logo"></a>
+                    <a href="{{Route('home')}}" class="standard-logo" ><img src="{{URL::asset('images/vapery.png')}}" alt="Vapery Logo" ></a>
                 </div><!-- #logo end -->
+
+                @if(Auth::check())
+                <div id="top-account" class="dropdown">
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="icon-user"></i><i class="icon-angle-down"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Messages <span class="badge">5</span></a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Logout <i class="icon-signout"></i></a></li>
+                    </ul>
+                </div>
+                @endif
+
 
                 <!-- Primary Navigation
                 ============================================= -->
@@ -79,6 +94,8 @@
                          <!-- Admin page
                         ============================================= -->
                         @if(Auth::check())
+
+
                             @if(Auth::user()->role =='admin')
 
                          <li><a href="#"> <div><i class="icon-user"></i>Admin Controller</div></a>
@@ -91,63 +108,60 @@
                              @endif
                         @endif
 
+                        <li class="mega-menu"><a href="#"><div><i class="icon-beaker"></i>Liquids</div></a>
+                            <div class="mega-menu-content style-2 clearfix" style="background-image: url('images/shop/shop-menu.jpg'); background-repeat: no-repeat; background-position: right bottom;">
 
-                        <li><a href="{{route('filterCategory',['category'=>'mod'] )}}"><div><i class="icon-bolt2"></i>Devices</div></a>
 
-                            <ul>
-                                <li><a href="{{ route('filterCategory',['category'=>'fullkit'] )}}"><div>Full Kit</div></a> </li>
+                                <ul class="mega-menu-column col-md-3">
+                                    <li class="mega-menu-title"><a href="#"><div>E-Liquid Companies  </div></a>
+                                        <ul>
+                                            <li><a href="#"><div><i class="icon-t-shirt"></i>Men's Shirts</div></a></li>
+                                            <li><a href="#"><div><i class="icon-laptop2"></i>Women's Accessories</div></a></li>
+                                            <li><a href="#"><div><i class="icon-clock2"></i>Branded Watches</div></a></li>
+                                            <li><a href="#"><div><i class="icon-plane"></i>Innerwear &amp; Lingerie</div></a></li>
+                                            <li><a href="#"><div><i class="icon-barbell"></i>Belts &amp; Backpacks</div></a></li>
+                                            <li><a href="#"><div><i class="icon-heart3"></i>Gym &amp; Sportswear</div></a></li>
+                                            <li><a href="#"><div><i class="icon-film"></i>Personal Grooming</div></a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="mega-menu-column col-md-3 noleftborder">
+                                    <li class="mega-menu-title"><a href="#"><div>Filters</div></a>
+                                        <ul>
+                                            <li><a href="#"><div>70-30</div></a></li>
+                                            <li><a href="#"><div>50-50</div></a></li>
+                                            <li><a href="#"><div>0.3 Nicotine</div></a></li>
+                                            <li><a href="#"><div>0.6 Nicotine</div></a></li>
+                                            <li><a href="#"><div>Tommy Hilfiger</div></a></li>
+                                            <li><a href="#"><div>Gucci</div></a></li>
+                                            <li><a href="#"><div>Armani</div></a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
 
-                                <li><a href="{{route('filterCategory',['category'=>'mod'] )}}"><div>Mods</div></a> </li>
-                            </ul>
+                                <ul class="mega-menu-column col-md-2">
+                                    <li class="mega-menu-title"><a href="#"><div>Flavors  </div></a>
+                                        <ul>
+                                            <li><a href="#"><div><i class="icon-t-shirt"></i>Men's Shirts</div></a></li>
+                                            <li><a href="#"><div><i class="icon-laptop2"></i>Women's Accessories</div></a></li>
+                                            <li><a href="#"><div><i class="icon-clock2"></i>Branded Watches</div></a></li>
+                                            <li><a href="#"><div><i class="icon-plane"></i>Innerwear &amp; Lingerie</div></a></li>
+                                            <li><a href="#"><div><i class="icon-barbell"></i>Belts &amp; Backpacks</div></a></li>
+                                            <li><a href="#"><div><i class="icon-heart3"></i>Gym &amp; Sportswear</div></a></li>
+                                            <li><a href="#"><div><i class="icon-film"></i>Personal Grooming</div></a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
+                        <li><a href="{{route('about')}}"> <div><i class="icon-question"></i>About US</div></a>
+                        <li><a href="{{route('contact')}}"> <div><i class="icon-phone3"></i>Contact US</div></a>
 
-                        <li><a href="{{route('filterCategory',['category'=>'liquid'] )}}"><div><i class="icon-beaker"></i>Liquids</div></a>
 
-                            <ul>
-                                <li><a href="{{route('filterCategory',['category'=>'Premium'] )}}"><div>Premium</div></a></li>
-                                <li><a href="{{route('filterCategory',['category'=>'liquid'] )}}"><div>Top Egyptian E-liquid </div></a>
-                                    <ul>
-                                        <li><a href="{{route('filterCategory',['category'=>'vip'] )}}"><div>VIP</div></a></li>
-                                        <li><a href="{{route('filterCategory',['category'=>'MARVEL'] )}}"><div>MARVEL</div></a></li>
-                                        <li><a href="{{route('filterCategory',['category'=>'SULTAN'] )}}"><div>SULTAN</div></a></li>
-                                        <li><a href="{{route('filterCategory',['category'=>'MINIONS'] )}}"><div>MINIONS</div></a></li>
-                                        <li><a href="{{route('filterCategory',['category'=>'SMURFS'] )}}"><div>SMURFS</div></a></li>
-                                        <li><a href="{{route('filterCategory',['category'=>'FRUITSERIES'] )}}"><div>FRUIT SERIES</div></a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
 
-                        <li><a href="{{route('filterCategory',['category'=>'tank'] )}}"><div><i class="icon-bag"></i>Tanks</div></a>
 
-                            <ul>
-                                <li><a href="{{route('filterCategory',['category'=>'RDA'] )}}"><div>RDA</div></a> </li>
-                                <li><a href="{{route('filterCategory',['category'=>'RTA'] )}}"><div>RTA</div></a> </li>
-                                <li><a href="{{route('filterCategory',['category'=>'RDTA'] )}}"><div>RDTA</div></a> </li>
-                            </ul>
-                        </li>
-
-                        <li><a href="{{route('filterCategory',['category'=>'part'] )}}"><div><i class="icon-line-cog"></i>Parts</div></a>
-
-                            <ul>
-                                <li><a href="{{route('filterCategory',['category'=>'Coils Atomizer'] )}}"><div>Coils & Atomizer </div></a> </li>
-                                <li><a href="{{route('filterCategory',['category'=>'battaries'] )}}"><div>battaries</div></a> </li>
-                                <li><a href="{{route('filterCategory',['category'=>'dripTip'] )}}"><div>drip Tip</div></a> </li>
-                                <li><a href="{{route('filterCategory',['category'=>'chargers'] )}}"><div>Chargers</div></a> </li>
-                                <li><a href="{{route('filterCategory',['category'=>'accessories'] )}}"><div>Accessories</div></a> </li>
-                            </ul>
-                        </li>
-
-                        {{--<li><a href="{{route('offers')}}"><div><i class="icon-tag"></i>Offers</div></a>--}}
-                            {{--<ul>--}}
-
-                                {{--<li><a href="{{route('offers')}}"><div>Bundles</div></a> </li>--}}
-                            {{--</ul>--}}
-                        {{--</li>--}}
-
-                         
-                        <!-- login
-                        ============================================= -->
+                            <!-- login
+                            ============================================= -->
                         @if(Auth::check())
 
                             <li>
@@ -177,7 +191,9 @@
 						============================================= -->
                     @if(Auth::check())
 
-                    <div id="top-cart">
+
+
+                        <div id="top-cart">
                         @if( session()->get('cart') )
                         <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart"></i><span>{{session()->get('cart')->where('status', '!=',  'confirmed')->count() }}</span></a>
                         <div class="top-cart-content">
@@ -233,11 +249,14 @@
 
     </header><!-- #header end -->
 
+
+
     <div class="clearfix"></div>
 
     <!-- Product Title Start-->
 
     @yield('product_title')
+
 
     <!-- #Content Start-->
 
@@ -335,6 +354,7 @@
 ============================================= -->
 <script type="text/javascript" src="{{ URL::asset("js/jquery.js")}}"></script>
 <script type="text/javascript" src="{{ URL::asset("js/plugins.js")}}"></script>
+<script type="text/javascript" src={{ URL::asset("js/jquery.camera.js")}}></script>
 
 <!-- Star Rating Plugin -->
 
@@ -345,6 +365,8 @@
 <!-- Footer Scripts
 ============================================= -->
 <script type="text/javascript" src="{{ URL::asset("js/functions.js")}}" > </script>
+
+
 
 <!-- Star Rating js -->
 <script type="text/javascript">

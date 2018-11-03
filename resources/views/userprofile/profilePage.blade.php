@@ -6,39 +6,56 @@
 		<!-- Content
 		============================================= -->
 
-        <div class="col-sm-12" style="margin-top: 80px;">
+        <div class="col-sm-12 topmargin-sm">
 
-							<img src="/images/icons/avatar1.png" class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
+							<div class="bottommargin-lg">
 
-							<div class="heading-block noborder">
-								<h3>{{$userData->name}}</h3>
-								<span>Your Profile Bio</span>
+							<img src="{{ URL::asset("images/icons/avatar1.png" )}}" class="alignleft img-rounded img-thumbnail " alt="Avatar" style="max-width: 100px;">
+
 							</div>
+			<div class="clear"></div>
+			<div class="heading-block noborder ">
 
+				<h3>Name : <span> {{$userData->name}} </span> </h3>
 
-                <div class="fancy-title topmargin-sm title-border">
-                    <h4>About Me</h4>
-                </div>
-
-			<div class="container">
-				<div class="row ">
-
-					<div class="col-md-4">
-            		<p> <span> Address : </span> {{ $userData->address }} </p>
-				</div>
-
-					<div class="col-md-4">
-						<p>	<span> Mobile : </span> {{ $userData->mobile }} </p>
-					</div>
-
-							<div class="col-md-4">
-								<p> <span>  Email : </span> {{ $userData->email }}   </p>
-							</div>
-				</div>
 			</div>
 
+			<div class="fancy-title topmargin-sm title-border">
+				<h4>About Me</h4>
+			</div>
+			<div class="container clearfix">
+						<div class="col_one_third">
+							<div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+								<div class="fbox-icon">
+									<a href="#"><i class="icon-home2"></i></a>
+								</div>
+								<h3>Address<span class="subtitle">{{ $userData->address }}</span></h3>
+							</div>
+						</div>
+
+						<div class="col_one_third">
+							<div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+								<div class="fbox-icon">
+									<a href="#"><i class=" icon-phone3"></i></a>
+								</div>
+								<h3>Mobile<span class="subtitle">{{ $userData->mobile }}</span></h3>
+							</div>
+						</div>
+
+						<div class="col_one_third col_last">
+							<div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+								<div class="fbox-icon">
+									<a href="#"><i class=" icon-email3"></i></a>
+								</div>
+								<h3>Email<span class="subtitle">{{ $userData->email }}</span></h3>
+							</div>
+						</div>
+					</div>
+		</div>
+
+		<div class="clear"></div>
 				<div class="fancy-title topmargin-sm title-border">
-					<h4>My Profile</h4>
+					<h4>My Actions Histroy </h4>
 				</div>
 
 							<div class="clear"></div>

@@ -69,8 +69,16 @@
 
                         {!! Form::open(['action' => 'orderController@store', 'method'=>'post' , 'class'=>"cart nobottommargin clearfix"]) !!}
                         {!! Form::label('quantity', 'Select quantity ') !!} <br>
-                        <input type="number"  min="1" max="{{$product->stock}}" step="1"  value="1" name="quantity"  title="Qty" class="qty" size="4" />
+                        <input type="button" value="-" class="minus" onclick="decreaseValue()">
+                        <input type="number"  min="1" max="{{$product->stock}}" step="1"  value="1" name="quantity"  title="Qty" class="qty" size="4" style="input[type=number]::-webkit-inner-spin-button  input[type=number]::-webkit-outer-spin-button -webkit-appearance: none " margin: 0;" />
+                        <input type="button" value="+" class="plus" onclick="increaseValue()">
                         {!! Form::hidden('product_id', $product->id ) !!}
+
+                        <div class="quantity clearfix">
+
+
+                        </div>
+
                     </div>
                     {!! Form::submit('Add to cart' , ['class'=>'add-to-cart button nomargin']) !!}
                     {!! Form::close() !!}<!-- Product Single - Quantity & Cart Button End -->
@@ -302,3 +310,23 @@
 </div>
 
 @endsection
+
+@section('script')
+    <script>
+        function increaseValue() {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value++;
+            document.getElementById('number').value = value;
+        }
+
+        function decreaseValue() {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value < 1 ? value = 1 : '';
+            value--;
+            document.getElementById('number').value = value;
+        }
+    </script>
+
+    @endsection
