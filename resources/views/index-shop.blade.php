@@ -3,8 +3,7 @@
 	<!-- Document Title
     ============================================= -->
 
-@section('title','Vapery | The Vapes Home')
-
+@section('title','Vapery | The Liquids Home')
 
 @section('content')
 
@@ -24,16 +23,16 @@
 					<div class="container">Looks beautiful &amp; ultra-sharp on Retina Screen Displays.</div>
 				</div>
 			</div>
-			<div data-src={{ URL::asset("images/slider/3.jpg")}}>
-				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
-					<div class="container">Included 20+ custom designed Slider Pages with Premium Sliders like Layer, Revolution, Swiper &amp; others.</div>
-				</div>
-			</div>
-			<div  data-src={{ URL::asset("images/slider/4.jpg")}}>
-				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
-					<div class="container">You have easy control on each &amp; every element that provides endless customization possibilities.</div>
-				</div>
-			</div>
+			{{--<div data-src={{ URL::asset("images/slider/3.jpg")}}>--}}
+				{{--<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">--}}
+					{{--<div class="container">Included 20+ custom designed Slider Pages with Premium Sliders like Layer, Revolution, Swiper &amp; others.</div>--}}
+				{{--</div>--}}
+			{{--</div>--}}
+			{{--<div  data-src={{ URL::asset("images/slider/4.jpg")}}>--}}
+				{{--<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">--}}
+					{{--<div class="container">You have easy control on each &amp; every element that provides endless customization possibilities.</div>--}}
+				{{--</div>--}}
+			{{--</div>--}}
 		</div>
 
 	</section>
@@ -169,7 +168,7 @@
 
     <div class="clear"></div>
 
-    <div class="col_one_third bottommargin-lg topmargin-sm">
+    <div class="col_one_third bottommargin-lg">
 
         <div class="fancy-title title-border">
             <h4>Highest Rated </h4>
@@ -179,7 +178,7 @@
 
             <div class="spost clearfix">
                 <div class="entry-image">
-                    <a href="#"><img src="images/shop/small/1.jpg" alt="Image"></a>
+                    <a href="#"><img src="{{ URL::asset('products/images/'.$product->image1)}}" alt="Image" > </a>
                 </div>
                 <div class="entry-c">
                     <div class="entry-title">
@@ -207,7 +206,7 @@
 
             <div class="spost clearfix">
                 <div class="entry-image">
-                    <a href="#"><img src="images/shop/small/3.jpg" alt="Image"></a>
+                    <a href="#"><img src="" alt="Image"></a>
                 </div>
                 <div class="entry-c">
                     <div class="entry-title">
@@ -235,7 +234,7 @@
 
             <div class="spost clearfix">
                 <div class="entry-image">
-                    <a href="#"><img src="images/shop/small/8.jpg" alt="Image"></a>
+                    <a href="#"><img src="" alt="Image"></a>
                 </div>
                 <div class="entry-c">
                     <div class="entry-title">
@@ -321,10 +320,8 @@
 <!-- age verfication -->
 @section('script')
 
+    <script type="text/javascript" src="{{ URL::asset("js/jquery.cookie.js")}}" > </script>
 	<script type="text/javascript" src="{{ URL::asset("js/bootbox.min.js")}}" > </script>
-	<script type="text/javascript" src="{{ URL::asset("js/bootstrap.min.js")}}" > </script>
-	<script type="text/javascript" src="{{ URL::asset("js/jquery.cookie.js")}}" > </script>
-
 	<script type="text/javascript">
 
         jQuery(document).ready(function($) {

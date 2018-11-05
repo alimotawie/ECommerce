@@ -71,6 +71,7 @@
 								<td>
 									{!! Form::open(['method'=>'post','route'=>['confirmOrder'] ]) !!}
 									{!! Form::hidden('order_id',$order->id ) !!}
+									{!! Form::hidden('user_id',App\User::find($order->user_id)->id ) !!}
 									{!! Form::submit( 'Confirm Order',['class'=>'btn btn-success']) !!}
 									{!! Form::close() !!}
 								</td>

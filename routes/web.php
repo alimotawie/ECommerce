@@ -87,6 +87,10 @@ Route::post('/review/{productID}' , 'reviewController@setReview')->name('addRevi
 Route::get('/getreview/{productID}' , 'reviewController@getReview');
 
 
+Route::get('clear/{id?}','orderController@Clear')->name('notifyClear');
+Route::post('peersrequest/notifi','cashcollection@notification')->name('notify');
+
+
 
 
 

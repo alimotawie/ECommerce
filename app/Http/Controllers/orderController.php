@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\OrderConfirm;
 use App\Order;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
+
 
 class orderController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -171,11 +176,25 @@ class orderController extends Controller
 
             $product->stock = ($product->stock) - ($confirm->quantity);
             $product->save();
+            $order_ID=$request->order_id;
+
+            User::find($request->user_id)->notify(new OrderConfirm($order_ID));
 
             return redirect()->back()->with('status','Order Confirmed , Stock updated');
         }
 
 
+    }
+
+    Public function Clear($id=null)
+    {
+        if($id) {
+            Auth::user()->notifications()->where('id', $id)->first()->delete();
+        }
+        else
+            Auth::user()->notifications()->delete();
+
+        return redirect()->back();
     }
 
 }

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ URL::asset("css/font-icons.css")}}" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset("css/animate.css")}}" type="text/css" />
     <link rel="stylesheet" href="{{ URL::asset("css/magnific-popup.css")}}" type="text/css" />
-    <link rel="stylesheet" href={{ URL::asset("css/camera.css")}} type="text/css" />
+    <link rel="stylesheet" href="{{ URL::asset("css/camera.css")}}" type="text/css" />
 
 
     <!-- Star Rating CSS -->
@@ -72,23 +72,13 @@
                     <a href="{{Route('home')}}" class="standard-logo" ><img src="{{URL::asset('images/vapery.png')}}" alt="Vapery Logo" ></a>
                 </div><!-- #logo end -->
 
-                @if(Auth::check())
-                <div id="top-account" class="dropdown">
-                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="icon-user"></i><i class="icon-angle-down"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Messages <span class="badge">5</span></a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Logout <i class="icon-signout"></i></a></li>
-                    </ul>
-                </div>
-                @endif
+
+
 
 
                 <!-- Primary Navigation
                 ============================================= -->
-                <nav id="primary-menu" class="style-5">
+                <div id="primary-menu" class="style-5">
 
                     <ul>
                          <!-- Admin page
@@ -186,13 +176,18 @@
                     </ul>
 
                 @endif
+                <!-- Top Search
+                    ============================================= -->
+                    <div id="top-search">
+                        <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+                        {!! Form::open([ 'route'=>'findItem' , 'method'=>'POST']) !!}
+                        {!! Form::text( 'keyword' ,"" ,[ 'class'=>"form-control" , 'placeholder' =>"Type &amp; Hit Enter.."]) !!}
+                        {!! Form::close() !!}
+                    </div><!-- #top-search end -->
 
                 <!-- Top Cart
 						============================================= -->
                     @if(Auth::check())
-
-
-
                         <div id="top-cart">
                         @if( session()->get('cart') )
                         <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart"></i><span>{{session()->get('cart')->where('status', '!=',  'confirmed')->count() }}</span></a>
@@ -233,22 +228,47 @@
                         </div>
                     @endif
                         @endif
-                    <!-- Top Search
-                    ============================================= -->
-                    <div id="top-search">
-                        <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
-                        {!! Form::open([ 'route'=>'findItem' , 'method'=>'POST']) !!}
-                        {!! Form::text( 'keyword' ,"" ,[ 'class'=>"form-control" , 'placeholder' =>"Type &amp; Hit Enter.."]) !!}
-                       {!! Form::close() !!}
-                    </div><!-- #top-search end -->
 
-                </nav><!-- #primary-menu end -->
+
+            <!-- Top notification
+                    ============================================= -->
+                @if(Auth::check())
+                    <div id="top-account" class="dropdown" >
+                        <a href="#" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="icon-bell"> {{Auth::user()->Notifications->count()}}</i> </a>
+                        @if(Auth::user()->Notifications->count()>0)
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu3"  style="width: 300px; overflow-y: auto; height: 300px;">
+                                <div class="top-cart-title"> <h4>Notifications</h4></div>
+                                @foreach(Auth::user()->Notifications as $notify)
+                                    <li>
+                                        @foreach($notify->data as $value)
+                                            @if($value)
+                                                {{$value}} <br>
+                                            @else
+                                                No Notifications
+                                            @endif
+                                        @endforeach
+                                    </li>
+
+                                    {!! Form::open([ 'route'=>['notifyClear','id'=>$notify->id], 'method'=>'get']) !!}
+                                    {!!  Form::submit('Delete Notification',['class'=>'button button-3d button-mini button-rounded button-red']) !!}
+                                    {!! Form::close() !!}
+                                    <li role="separator" class="divider"></li>
+                                @endforeach
+                                <li>
+                                        {!! Form::open([ 'route'=>'notifyClear', 'method'=>'get']) !!}
+                                        {!!  Form::submit('Clear Notifications' ,['class'=>'button button-3d button-mini button-rounded button-red']) !!}
+                                        {!! Form::close() !!}
+                                </li>
+                            </ul>
+                        @endif
+                    </div>
+                @endif
 
             </div>
 
+            </div>
 
     </header><!-- #header end -->
-
 
 
     <div class="clearfix"></div>
@@ -262,7 +282,7 @@
 
     <section id="content">
 
-        <div class="content-wrap" style="padding: 0;">
+        <div class="content-wrap topmargin-sm" style="padding: 0;">
 
             <div class="container clearfix">
 
@@ -354,7 +374,7 @@
 ============================================= -->
 <script type="text/javascript" src="{{ URL::asset("js/jquery.js")}}"></script>
 <script type="text/javascript" src="{{ URL::asset("js/plugins.js")}}"></script>
-<script type="text/javascript" src={{ URL::asset("js/jquery.camera.js")}}></script>
+<script type="text/javascript" src="{{ URL::asset("js/jquery.camera.js")}}"></script>
 
 <!-- Star Rating Plugin -->
 
