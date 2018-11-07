@@ -45,7 +45,7 @@ class productController extends Controller
                 $totalRate += $rate->rate;
             }
 
-            $averageRate=$totalRate/$count;
+            $averageRate=($totalRate/$count);
 
         }
 
@@ -89,9 +89,9 @@ class productController extends Controller
         $newProduct->brand= $request->brand ;
         $newProduct->description = $request->description;
         $newProduct->price = $request->price;
-        $newProduct->category = $request->category;
+        $newProduct->nicotine = $request->nicotine;
+        $newProduct->concentration = $request->concentration;
         $newProduct->stock = $request->stock;
-
 
 
         $logo = $request->file('logo');
@@ -136,15 +136,37 @@ class productController extends Controller
 
         session()->put('cart', $orders);
 
-        $RelatedProducts=Product::where('category','=', $product->category)->take(10)->get();
+        $RelatedProducts=Product::where('concentration','=', $product->concentration)->take(10)->get();
 
         return view('product.productdetails',compact('product','reviews','RelatedProducts'));
     }
 
-    public function showbyCategory($category)
+    public function showbynicotine($category)
     {
-        $products = Product::where('category','=', $category)->orWhere('name','LIKE', '%'.$category.'%')->get();
+        $products = Product::where('nicotine','like' , '%'. $category .'%')->get();
 
+        return view('product.products',compact('products'));
+    }
+
+    public function showbyconcentration($category)
+    {
+
+        $products = Product::where('concentration', 'like' , '%'. $category .'%')->get();
+
+        return view('product.products',compact('products'));
+    }
+
+    public function showbybrand($category)
+    {
+
+        $products = Product::where('brand', 'like' , '%'. $category .'%')->get();
+
+        return view('product.products',compact('products'));
+    }
+
+    public function showbyflavor($category)
+    {
+        $products = Product::where('description', 'like' , '%'. $category .'%')->get();
 
         return view('product.products',compact('products'));
     }
@@ -186,13 +208,13 @@ class productController extends Controller
         {
         $updateProduct = Product::where('id','=',$id)->first();
 
-        $updateProduct->name = $request->name;
-        $updateProduct->brand= $request->brand ;
-        $updateProduct->description = $request->description;
-        $updateProduct->price = $request->price;
-        $updateProduct->category = $request->category;
-        $updateProduct->stock = $request->stock;
-
+            $updateProduct->name = $request->name;
+            $updateProduct->brand= $request->brand ;
+            $updateProduct->description = $request->description;
+            $updateProduct->price = $request->price;
+            $updateProduct->nicotine = $request->nicotine;
+            $updateProduct->concentration = $request->concentration;
+            $updateProduct->stock = $request->stock;
 
         if( $request->file('logo') )
         {
@@ -271,26 +293,7 @@ class productController extends Controller
     {
         $keyword = $request->keyword;
 
-        $products = Product::where('name' , 'like' ,'%'. $keyword .'%')->orwhere('description' , 'like' ,'%'. $keyword .'%')->get();
-
-
-
-        if($products->count()==0)
-        {
-            return view("product/products")->with('failMsg' ,'No results Found');
-        }else{
-
-            return view("product/products", compact('products'));
-        }
-
-    }
-
-    public function navCategory($searchword)
-    {
-        $keyword = $searchword;
-
-        $products = Product::where('name' , 'like' ,'%'. $keyword .'%')->orwhere('description' , 'like' ,'%'. $keyword .'%')->get();
-
+        $products = Product::where('name' , 'like' ,'%'. $keyword .'%')->orwhere('description' , 'like' ,'%'. $keyword .'%')->orwhere('brand' , 'like' ,'%'. $keyword .'%')->get();
 
 
         if($products->count()==0)
@@ -302,5 +305,6 @@ class productController extends Controller
         }
 
     }
+
 
 }

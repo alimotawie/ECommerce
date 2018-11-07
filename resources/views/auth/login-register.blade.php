@@ -56,7 +56,7 @@
 								<div class="col_full nobottommargin">
 									<button class="button button-3d nomargin" type="submit">{{ __('Login') }}</button>
 
-									<!-- <a class="fright" href="{{ route('password.request') }}"> {{ __('Forgot Your Password?') }} </a> -->
+									<a class="fright" href="{{ route('password.request') }}"> {{ __('Forgot Your Password?') }} </a>
 								</div>
 
 							</form>

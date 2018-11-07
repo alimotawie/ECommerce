@@ -159,32 +159,41 @@ class orderController extends Controller
         return view('product.orderconfirm',compact('orders'));
 
     }
+
+
     public  function confirmOrder(Request $request)
     {
-        $confirm=Order::find($request->order_id);
+        $confirm = Order::find($request->order_id);
 
-        $product=Product::find($confirm->product_id);
+        $product = Product::find($confirm->product_id);
 
-        if($product->stock <= 0)
-        {
-            return redirect()->back()->with('error',' No Enough Stock !');
+        if ($product->stock <= 0) {
+            return redirect()->back()->with('error', ' No Enough Stock !');
 
-        }else {
+        } else {
 
-            $confirm->status='confirmed';
+            $confirm->status = 'confirmed';
             $confirm->save();
 
             $product->stock = ($product->stock) - ($confirm->quantity);
             $product->save();
-            $order_ID=$request->order_id;
+            $order_ID = $request->order_id;
 
             User::find($request->user_id)->notify(new OrderConfirm($order_ID));
 
-            return redirect()->back()->with('status','Order Confirmed , Stock updated');
+            return redirect()->back()->with('status', 'Order Confirmed , Stock updated');
+        }
+    }
+
+        public  function deleteOrder(Request $request)
+    {
+
+        Order::destroy($request->order_id);
+
+            return redirect()->back()->with('status','Order Delete');
         }
 
 
-    }
 
     Public function Clear($id=null)
     {

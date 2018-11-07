@@ -10,18 +10,18 @@
 
     @else
 
-    <div class="notopmargin bottommargin-lg">
         @if (session('status'))
-            <div class="alert alert-danger">
+    <div class="notopmargin nobottommargin">
+
+            <div class="alert alert-success">
                 {{ session('status') }}
             </div>
-
-        @endif
     </div>
-
+        @endif
+        
     <!-- Content
 		============================================= -->
-    <section id="content">
+    <section id="content" class="notopmargin">
 
         <div class="content-wrap notopmargin">
 
@@ -40,6 +40,7 @@
                                 <div class="product-image">
                                     <a href="#"><img src="{{ URL::asset('products/images/'.$product->image1)}}" alt="Image 1" style="height: 223px;"></a>
                                     <a href="#"><img src="{{ URL::asset('products/images/'.$product->image2)}}" alt="Image 2" style="height: 223px;"></a>
+                                    {{--discount option remove stylw to activate--}}
                                     <div class="sale-flash" style="display: none;">50% Off*</div>
                                     @if(Auth::check())
                                         <div class="product-overlay">
@@ -64,7 +65,7 @@
                                     {{--<div class="product-title"><h3><a href="#">Men Grey Casual Shoes Men Grey Casual Shoes Men Grey Casual Shoes</a></h3></div>--}}
                                     <div class="product-price">{{$product->price}} LE </div>
                                     <div class="product-rate">
-                                        <input id="input-15" class="rating" value="{{ $product->rates()['averageRate']}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
+                                        <input id="input-15" class="rating" value="{{ ceil($product->rates()['averageRate'])}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
                                         ( Users : {{ $product->rates()['count']}})
 
                                     </div>
@@ -85,12 +86,12 @@
                             <h4>Select Category</h4>
                             <ul class="custom-filter" data-container="#shop" data-active-class="active-filter">
                                 <li class="widget-filter-reset active-filter"><a href="#" data-filter="*">Clear</a></li>
-                                <li><a href="#" data-filter=".sf-mod">Mods</a></li>
-                                <li><a href="#" data-filter=".sf-tank">Tanks</a></li>
-                                <li><a href="#" data-filter=".sf-liquid">liquids</a></li>
-                                <li><a href="#" data-filter=".sf-accessories">Accessories</a></li>
-                                <li><a href="#" data-filter=".sf-parts">Parts</a></li>
-                                <li><a href="#" data-filter=".sf-offers">Offers</a></li>
+                                <li><a href="#" data-filter=".sf-70">70/30</a></li>
+                                <li><a href="#" data-filter=".sf-50">50/50</a></li>
+                                <li><a href="#" data-filter=".sf-3">0.3 mg nicotine</a></li>
+                                <li><a href="#" data-filter=".sf-6">0.6 mg nicotine</a></li>
+                                <li><a href="#" data-filter=".sf-12">0.12 mg nicotine</a></li>
+
                             </ul>
 
                         </div>
@@ -171,10 +172,9 @@
                     elementFilter = element.children('a').attr('data-filter'),
                     elementFilterContainer = element.parents('.custom-filter').attr('data-container');
 
-                elementFilterCount = Number( jQuery(elementFilterContainer).find( elementFilter ).length );
+                elementFilterCount = Number(jQuery(elementFilterContainer).find( elementFilter ).length );
 
                 element.append('<span>'+ elementFilterCount +'</span>');
-
             });
 
             $('.shop-sorting li').click( function() {

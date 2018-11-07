@@ -1,7 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.header-footer')
+
+@section('title' , 'Rest Password')
+
 
 @section('content')
-<div class="container">
+<div class="clearfix">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

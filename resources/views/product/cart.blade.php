@@ -118,7 +118,7 @@
 												<div class="row clearfix">
 
 													<div class="col-md-12 col-xs-12 nopadding">
-														<a href="{{route('pendingOrder')}}" class="button button-3d notopmargin fright">Proceed to Checkout</a>
+															<a href="{{route('pendingOrder')}}" class="button button-aqua notopmargin fright">Proceed to Checkout / Check My Orders</a>
 													</div>
 												</div>
 											</td>

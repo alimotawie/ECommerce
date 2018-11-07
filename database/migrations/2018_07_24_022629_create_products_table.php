@@ -18,7 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('brand');
-            $table->string('category');
+            $table->string('nicotine');
+            $table->string('concentration');
             $table->double('price');
             $table->integer('stock');
             $table->string('logo');

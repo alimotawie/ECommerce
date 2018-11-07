@@ -72,10 +72,19 @@
                                 </div>
 
                         <div class="form-group row">
-                            <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Product Category') }}</label>
+                            <label for="nicotine" class="col-md-4 col-form-label text-md-right">{{ __('Nicotine Level') }}</label>
 
                             <div class="col-md-6">
-                                {!! Form::select('category', ['tank' => 'Tank', 'mod' => 'Mod' , 'coil'=>'Coil' , 'liquid'=>'Liquid' , 'battery'=>'Battery', 'accessories'=>'Accessories' ], null, ['placeholder' => 'Pick a Category...' ,'required']); !!}
+                                {!! Form::select('nicotine', ['0mg' => '0', '3mg' => '3' , '6mg'=>'6' , '12mg'=>'12' ], null, ['placeholder' => 'Pick Nicotine Level...' ,'required']); !!}
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="concentration" class="col-md-4 col-form-label text-md-right">{{ __('Concentration Level') }}</label>
+
+                            <div class="col-md-6">
+                                {!! Form::select('concentration', ['70/30' => '70', '50/50' => '50'  ], null, ['placeholder' => 'Pick Concentration Level...' ,'required']); !!}
 
                             </div>
                         </div>

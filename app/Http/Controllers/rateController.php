@@ -29,7 +29,7 @@ class rateController extends Controller
                 $totalRate += $rate->rate;
             }
 
-            $averageRate=$totalRate/$count;
+            $averageRate=round($totalRate/$count);
 
         }
 

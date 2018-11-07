@@ -12,8 +12,9 @@
 
 @section('content')
 
-<div class="notopmargin bottommargin-lg">
     @if (session('status'))
+<div class="notopmargin nobottommargin">
+
         <div class="alert alert-success">
             {{ session('status') }}
         </div>
@@ -53,7 +54,7 @@
                 ============================================= -->
                 <div class="product-rating">
 
-                        <input id="input-15" class="rating" value="{{$product->rates()['averageRate']}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
+                        <input id="input-15" class="rating" value="{{ceil($product->rates()['averageRate'])}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
                         ( users : {{ $product->rates()['count']}})
 
                 </div><!-- Product Single - Rating End -->
@@ -98,7 +99,9 @@
                 ============================================= -->
                 <div class="panel panel-default product-meta">
                     <div class="panel-body">
-                        <span class="posted_in">Category: <a href="{{route('filterCategory', ['category' => $product->category])}}" rel="tag">{{$product->category}}</a>.</span>
+                        <span class="posted_in">Conentration: <a href="{{route('filterConcentration', ['concentration' => $product->concentration])}}" rel="tag">{{$product->concentration}}</a>,
+                        Nicotine : <a href="{{route('filterNicotine', ['nicotine' => $product->nicotine])}}" rel="tag">{{$product->nicotine}}</a></span>
+                        Brand : <a href="{{route('filterBrand', ['brand' => $product->brand])}}" rel="tag">{{$product->brand}}</a></span>
                     </div>
                 </div><!-- Product Single - Meta End -->
 
@@ -123,23 +126,23 @@
                         <i class="icon-credit-cards"></i>
                     </div>
                     <h3>Payment Options</h3>
-                    <p class="notopmargin">We accept Visa, MasterCard and American Express.</p>
+                    <p class="notopmargin">Easy Cash on delivery.</p>
                 </div>
 
                 <div class="feature-box fbox-plain fbox-dark fbox-small">
                     <div class="fbox-icon">
                         <i class="icon-truck2"></i>
                     </div>
-                    <h3>Free Shipping</h3>
-                    <p class="notopmargin">Free Delivery to 100+ Locations on orders above $40.</p>
+                    <h3>Shipping</h3>
+                    <p class="notopmargin">Across Egypt with moderate fees </p>
                 </div>
 
                 <div class="feature-box fbox-plain fbox-dark fbox-small">
                     <div class="fbox-icon">
-                        <i class="icon-undo"></i>
+                        <i class="icon-tag"></i>
                     </div>
-                    <h3>30-Days Returns</h3>
-                    <p class="notopmargin">Return or exchange items purchased within 30 days.</p>
+                    <h3>Competitive Prices</h3>
+                    <p class="notopmargin">Lowest price and best offers</p>
                 </div>
 
             </div>
@@ -269,32 +272,26 @@
 
         <!-- recent added
                     ============================================= -->
-        <div id="oc-products" class="owl-carousel products-carousel carousel-widget notopmargin" data-margin="20" data-nav="true" data-pagi="false" data-items-xxs="1" data-items-xs="2" data-items-sm="3" data-items-md="4">
+        <div id="oc-products" class="owl-carousel products-carousel carousel-widget notopmargin bottommargin-sm" data-margin="20" data-nav="true" data-pagi="false" data-items-xxs="1" data-items-xs="2" data-items-sm="3" data-items-md="4">
 
             @foreach($RelatedProducts as $product)
 
                 <div class="oc-item">
                     <div class="product sf-{{$product->category}}  clearfix">
                         <div class="product-image">
-                            <a> <img src="{{ URL::asset('products/images/'.$product->image1)}}" alt="item image 1"></a>
-                            <a><img  src="{{ URL::asset('products/images/'.$product->image2)}}" alt="item image 2 "> </a>
+                            <a> <img src="{{ URL::asset('products/images/'.$product->image1)}}" alt="item image 1" style="height:250px;"></a>
+                            <a><img  src="{{ URL::asset('products/images/'.$product->image2)}}" alt="item image 2" style="height:250px;"> </a>
 
-                                <div class='center'>
-                                    <div class="product-overlay">
-
-                                    </div>
-                                </div>
                         </div>
-
 
                     <div class="product-desc center ">
 
                         <div class="product-title"><h3><a href="{{route('product.show', ['product' => $product->id])}}">{{$product->name}}</a></h3></div>
-                        <div class="product-price">{{$product->price }} LE </div>
+                        <div><span style="font-weight:bold; font-size: medium; ;">{{$product->price }} LE</span> </div>
 
                         <div class="product-rate">
 
-                            <input id="input-15" class="rating" value="{{ $product->rates()['averageRate']}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
+                            <input id="input-15" class="rating" value="{{ ceil($product->rates()['averageRate'])}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
                             ( Users : {{ $product->rates()['count']}})
 
                         </div>
@@ -307,7 +304,6 @@
     </div>
 </div>
 
-</div>
 
 @endsection
 

@@ -6,13 +6,14 @@
 
 	@if(Auth::user()->role != 'admin')
 	<div class="fancy-title title-dotted-border title-center" >
-		<h4>Wait for <span> Admin </span> Confrimation </h4>
+		<h4>My Orders </h4>
 	</div>
 
 	<div class="style-msg2" style="background-color: #EEE;">
 		<div class="msgtitle">Ordering Rules:</div>
 		<div class="sb-msg">
 			<ul>
+				<li>Pending order must be confirmed to proceed with process  </li>
 				<li>Expect a call From Admin for orders confirmation </li>
 				<li>Unconfirmed orders are deleted if no response within 48 Hours </li>
 				<li>Ensure that all your profile data are true and correct </li>
@@ -54,6 +55,7 @@
 							  <th>Status </th>
 								@if(Auth::user()->role == 'admin')
 									<th> Confirmation </th>
+									<th> Delete </th>
 									@endif
 							</tr>
 						  </thead>
@@ -75,7 +77,16 @@
 									{!! Form::submit( 'Confirm Order',['class'=>'btn btn-success']) !!}
 									{!! Form::close() !!}
 								</td>
-									@endif
+
+
+									<td>
+										{!! Form::open(['method'=>'post','route'=>['deleteOrder'] ]) !!}
+										{!! Form::hidden('order_id',$order->id ) !!}
+										{!! Form::hidden('user_id',App\User::find($order->user_id)->id ) !!}
+										{!! Form::submit( 'Delete Order',['class'=>'btn btn-danger']) !!}
+										{!! Form::close() !!}
+									</td>
+								@endif
 							</tr>
 							@endforeach
 						  </tbody>

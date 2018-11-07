@@ -11,28 +11,28 @@
 		============================================= -->
 
 	<section id="slider" class="slider clearfix topmargin-sm ">
-
 		<div class="camera_wrap" id="camera_wrap_1">
-			<div data-src={{ URL::asset("images/slider/1.jpg")}}>
+
+			<div data-src={{ URL::asset("images/slider/$slider->image1")}}>
 				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
-					<div class="container">Powerful Layout with Responsive functionality that can be adapted to any screen size.</div>
+					<div class="container"> <a class="btn-lg btn-info"> Check Products </a></div>
 				</div>
 			</div>
-			<div data-src={{ URL::asset("images/slider/2.jpg")}}>
+			<div data-src={{ URL::asset("images/slider/$slider->image2")}}>
 				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
-					<div class="container">Looks beautiful &amp; ultra-sharp on Retina Screen Displays.</div>
+					<div class="container"><a class="btn-lg btn-info"> Check Products </a></div>
 				</div>
 			</div>
-			{{--<div data-src={{ URL::asset("images/slider/3.jpg")}}>--}}
-				{{--<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">--}}
-					{{--<div class="container">Included 20+ custom designed Slider Pages with Premium Sliders like Layer, Revolution, Swiper &amp; others.</div>--}}
-				{{--</div>--}}
-			{{--</div>--}}
-			{{--<div  data-src={{ URL::asset("images/slider/4.jpg")}}>--}}
-				{{--<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">--}}
-					{{--<div class="container">You have easy control on each &amp; every element that provides endless customization possibilities.</div>--}}
-				{{--</div>--}}
-			{{--</div>--}}
+			<div data-src={{ URL::asset("images/slider/$slider->image3")}}>
+				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
+					<div class="container">Included 20+ custom designed Slider Pages with Premium Sliders like Layer, Revolution, Swiper &amp; others.</div>
+				</div>
+			</div>
+			<div  data-src={{ URL::asset("images/slider/$slider->image4")}}>
+				<div class="camera_caption fadeFromBottom flex-caption slider-caption-bg" style="left: 0; border-radius: 0; max-width: none;">
+					<div class="container">You have easy control on each &amp; every element that provides endless customization possibilities.</div>
+				</div>
+			</div>
 		</div>
 
 	</section>
@@ -48,7 +48,7 @@
 				</div>
 				<div class="fbox-desc">
 					<h3>70/30</h3>
-					<p><a href="#" class="btn btn-default">Shop Now</a></p>
+					<p><a href="{{route('filterConcentration',"70")}}" class="btn btn-default">Shop Now</a></p>
 				</div>
 			</div>
 		</div>
@@ -60,7 +60,7 @@
 				</div>
 				<div class="fbox-desc">
 					<h3>50/50</h3>
-					<p><a href="#" class="btn btn-default">Shop Now</a></p>
+					<p><a href="{{route('filterConcentration','50')}}" class="btn btn-default">Shop Now</a></p>
 				</div>
 			</div>
 		</div>
@@ -140,7 +140,7 @@
                         	</div>
                             @else
                             </div>
-                        	
+
 
                             @endif
 
@@ -151,13 +151,13 @@
 
                                 <div class="product-rate">
 
-                                            <input id="input-15" class="rating" value="{{ $product->rates()['averageRate']}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
+                                            <input id="input-15" class="rating" value="{{ ceil($product->rates()['averageRate'])}}" data-size="sm" data-glyphicon="false" data-rating-class="fontawesome-icon" data-readonly="true">
                                     ( Users : {{ $product->rates()['count']}})
 
                                 </div>
 
                              </div>
-                            
+
                             </div>
                         </div>
                         @endforeach
@@ -176,22 +176,25 @@
 
         <div>
 
-            <div class="spost clearfix">
-                <div class="entry-image">
-                    <a href="#"><img src="{{ URL::asset('products/images/'.$product->image1)}}" alt="Image" > </a>
-                </div>
-                <div class="entry-c">
-                    <div class="entry-title">
-                        <h4><a href="#">Blue Round-Neck Tshirt</a></h4>
+            @for ($i = 0 ; $i < count($highestRatetd) ; $i++)
+
+                <?php $singleProduct=App\Product::find($highestRatetd[$i]->product_id) ?>
+
+                <div class="spost clearfix">
+                    <div class="entry-image">
+                        <a href="{{route('singleProduct',$singleProduct['id'])}}"><img src="{{ URL::asset('products/images/'.$singleProduct['image1'])}}" alt="Image" > </a>
                     </div>
-                    <ul class="entry-meta">
-                        <li class="color">$29.99</li>
-                        <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
-                    </ul>
+                    <div class="entry-c">
+                        <div class="entry-title">
+                            <h4><a href="{{route('singleProduct',$singleProduct['id'])}}">{{$singleProduct['name']}}</a></h4>
+                        </div>
+                        <ul class="entry-meta">
+                            <li class="color">{{$singleProduct['price']}} LE</li>
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
-
-
+            @endfor
         </div>
 
     </div>
@@ -199,29 +202,34 @@
     <div class="col_one_third nobottommargin">
 
         <div class="fancy-title title-border">
-            <h4>Popular Products</h4>
+            <h4>Most Sold </h4>
         </div>
 
         <div>
 
-            <div class="spost clearfix">
-                <div class="entry-image">
-                    <a href="#"><img src="" alt="Image"></a>
-                </div>
-                <div class="entry-c">
-                    <div class="entry-title">
-                        <h4><a href="#">Round-Neck Tshirt</a></h4>
+
+            @for ($i = 0 ; $i < count($mostSoldproducts) ; $i++)
+
+                <?php $singleProduct2=App\Product::find($mostSoldproducts[$i]->product_id) ?>
+
+                <div class="spost clearfix">
+                    <div class="entry-image">
+                        <a href="{{route('singleProduct',$singleProduct2['id'])}}"><img src="{{ URL::asset('products/images/'.$singleProduct2['image1'])}}" alt="Image" > </a>
                     </div>
-                    <ul class="entry-meta">
-                        <li class="color">$15</li>
-                        <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i></li>
-                    </ul>
+                    <div class="entry-c">
+                        <div class="entry-title">
+                            <h4><a href="{{route('singleProduct',$singleProduct2['id'])}}">{{$singleProduct2['name']}}</a></h4>
+                        </div>
+                        <ul class="entry-meta">
+                            <li class="color">{{$singleProduct2['price']}} LE</li>
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
+            @endfor
 
 
         </div>
-
     </div>
 
     <div class="col_one_third nobottommargin col_last">
@@ -231,28 +239,31 @@
         </div>
 
         <div>
+            @foreach($recommendedProducts as $recProduct)
 
-            <div class="spost clearfix">
-                <div class="entry-image">
-                    <a href="#"><img src="" alt="Image"></a>
-                </div>
-                <div class="entry-c">
-                    <div class="entry-title">
-                        <h4><a href="#">Pink Printed Dress</a></h4>
+
+                <div class="spost clearfix">
+                    <div class="entry-image">
+                        <a href="{{route('singleProduct',$recProduct->id)}}"><img src="{{ URL::asset('products/images/'.$recProduct->image1)}}" alt="Image" > </a>
                     </div>
-                    <ul class="entry-meta">
-                        <li class="color">$21</li>
-                        <li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i></li>
-                    </ul>
-                </div>
-            </div>
+                    <div class="entry-c">
+                        <div class="entry-title">
+                            <h4><a href="{{route('singleProduct',$recProduct->id)}}">{{$recProduct->name}}</a></h4>
+                        </div>
+                        <ul class="entry-meta">
+                            <li class="color">{{$recProduct->price}} LE</li>
+                        </ul>
 
+                    </div>
+                </div>
+            @endforeach
         </div>
+    </div>
 
     </div>
 
 
-    <div class="divider divider-center topmargin-lg"><i class="icon-circle"></i></div>
+    <div class="divider divider-center topmargin-ls"><i class="icon-circle"></i></div>
 
     <h3 class="center">Process Steps </h3>
 
